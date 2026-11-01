@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ShieldCheck, Lock, User, ArrowRight, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Lock, User, ArrowRight, AlertCircle, ArrowLeft } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { api, setAdminToken } from '../lib/api';
 
@@ -27,11 +27,6 @@ export function AdminLogin() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const fillDemoCredentials = () => {
-    setUsername('admin');
-    setPassword('Admin@RG2026!');
   };
 
   return (
@@ -80,7 +75,7 @@ export function AdminLogin() {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder="Enter username"
                 className="w-full bg-[#171717] border border-zinc-700 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#F28C28]"
               />
             </div>
@@ -97,7 +92,7 @@ export function AdminLogin() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
+                placeholder="Enter password"
                 className="w-full bg-[#171717] border border-zinc-700 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#F28C28]"
               />
             </div>
@@ -118,18 +113,6 @@ export function AdminLogin() {
             )}
           </button>
         </form>
-
-        {/* Quick Demo Helper */}
-        <div className="mt-8 pt-6 border-t border-zinc-800 text-center">
-          <button
-            type="button"
-            onClick={fillDemoCredentials}
-            className="text-xs text-zinc-400 hover:text-[#F28C28] bg-zinc-800/80 hover:bg-zinc-800 px-3.5 py-2 rounded-lg transition-colors border border-zinc-700 inline-flex items-center gap-2"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-[#F28C28]" />
-            <span>Use Default Credentials (admin / Admin@RG2026!)</span>
-          </button>
-        </div>
       </div>
     </div>
   );
