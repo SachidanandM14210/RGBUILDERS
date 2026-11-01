@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #171717;
+  --color-brand-secondary: #777777;
+  --color-brand-bg: #F7F6F2;
+  --color-brand-accent: #F28C28;
+  --color-brand-accent-hover: #E07B17;
+  --color-brand-text: #222222;
+  --color-brand-dark: #101010;
+  --color-brand-dark-surface: #1C1C1C;
+  --color-brand-border: #E5E3DD;
+  --color-brand-border-dark: #2A2A2A;
+
+  --font-heading: "Space Grotesk", "Manrope", sans-serif;
+  --font-subheading: "Manrope", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #171717;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F28C28;
+}
+
+/* Subtle architectural grid pattern utility */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(242, 140, 40, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-grid-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Architectural blueprint accents */
+.blueprint-line {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(242, 140, 40, 0.4),
+    rgba(242, 140, 40, 0.4) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Glassmorphism accents */
+.glass-nav {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 227, 221, 0.8);
+}
