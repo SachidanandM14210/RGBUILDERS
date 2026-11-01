@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import dotenv from 'dotenv';
 import { initDatabase } from './db';
 import authRoutes from './routes/auth';
@@ -54,13 +55,28 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Start Express Server
-const server = app.listen(PORT, () => {
-  console.log(`=========================================`);
-  console.log(`🏗️ RG BUILDERS ENGINEERS AND CONTRACTORS Backend Server Running`);
-  console.log(`📡 URL: http://localhost:${PORT}`);
-  console.log(`📊 Health: http://localhost:${PORT}/api/health`);
-  console.log(`=========================================`);
-});
+// In production, serve frontend from 'dist'
+const distPath = path.resolve(process.cwd(), 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
+// Start Express Server (when not running inside serverless platform like Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`=========================================`);
+    console.log(`🏗️ RG BUILDERS ENGINEERS AND CONTRACTORS Backend Server Running`);
+    console.log(`📡 URL: http://localhost:${PORT}`);
+    console.log(`📊 Health: http://localhost:${PORT}/api/health`);
+    console.log(`=========================================`);
+  });
+}
 
 export default app;

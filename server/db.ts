@@ -3,7 +3,10 @@ import path from 'path';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
 
-const dbPath = path.resolve(process.cwd(), 'server', 'rg_construction.sqlite');
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NETLIFY);
+const dbPath = isServerless
+  ? path.resolve('/tmp', 'rg_construction.sqlite')
+  : path.resolve(process.cwd(), 'server', 'rg_construction.sqlite');
 
 // Ensure server directory exists
 const serverDir = path.dirname(dbPath);
